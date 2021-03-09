@@ -35,7 +35,7 @@ public class user extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		             request.getRequestDispatcher("hello.jsp").forward(request, response);;
+		             request.getRequestDispatcher("hello.jsp").forward(request, response);
 		
 	}
 
