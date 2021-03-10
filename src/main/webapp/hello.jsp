@@ -5,12 +5,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>DETAILS</title>
-<style>
+<style>	
+    body{
+	 background-color:#E4F1FF;
+	}
 	.cont{
 		text-align:center;
 		padding:20px;
 		margin:5px;
 		background-color:#C6DFFB;
+		box-shadow:0 0 2px 2px #B6D8FC;
 		margin-right:600px;
 		margin-left:600px;
 		margin-top:200px;

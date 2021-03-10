@@ -12,6 +12,9 @@
 <meta charset="ISO-8859-1">
 <title>Data</title>
 <style>
+	body{
+	 background-color:#F7FBFF;
+	}
     form{
     	margin:15px;
 		
