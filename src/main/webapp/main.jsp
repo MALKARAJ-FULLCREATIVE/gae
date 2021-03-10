@@ -1,3 +1,4 @@
+<%@page import="com.google.appengine.api.datastore.Query.SortDirection"%>
 <%@page import="com.google.appengine.api.datastore.DatastoreServiceFactory"%>
 <%@page import="com.google.appengine.api.datastore.DatastoreService"%>
 <%@page import="com.google.appengine.api.datastore.PreparedQuery"%>
@@ -45,6 +46,7 @@
 	padding:1px;
 	text-align:center;
 	}
+	
 </style>
 </head>
 <body>
@@ -58,39 +60,85 @@
 			<form action="/search"  method="GET">
 				<input type="text" placeholder="search" name="name">
 				<input type="submit" value="SUBMIT">
-				<a href="/add">Add user</a>
-		
+				<a href="/main?sort=alph1">ASCENDING</a>
+			    <a href="/main?sort=alph2">DESCENDING</a>	
+				<a href="/add">Add user</a>								
 			</form>
-			<%
-			  String name=(String)request.getAttribute("name");
-			  Long age=(Long)request.getAttribute("age");
-			  String place=(String)request.getAttribute("place");
-			  if(name!=null)
-			  {%><div class="contents">
+			  <%
+			  	  String sort=(String)request.getParameter("sort");
+				  String name=(String)request.getAttribute("name");
+				  System.out.println(sort);
+				  Long age=(Long)request.getAttribute("age");
+				  String place=(String)request.getAttribute("place");
+				  if(name!=null)
+				  {
+				  
+			  %>
+			    <div class="contents">
 				     <h3>Name :<%= name %></h3>
 				     <h3>Age :<%=age %></h3>
 				     <h3>Place :<%= place%></h3>
+
 				 </div>
-			  <%
-			  }
-			  else
-			  {
-			  	Query q = new Query("user");
-				DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-				PreparedQuery pq = datastore.prepare(q);
-				//Entity result =pq.asSingleEntity();
-				
-				for (Entity result : pq.asIterable()) 
-				{
-				%>
-					<div class="contents">				  
-					  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
-					  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
-					  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
-					 </div>
-				<%
-				}
-			  } 
+			 <%
+		     	  }
+
+				  else if(sort.equals("alph1"))
+				  {
+					  System.out.println("In");
+					  Query q1 = new Query("user").addSort("Name", SortDirection.ASCENDING);
+					  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+					  PreparedQuery p = datastore.prepare(q1);						
+						//Entity result =pq.asSingleEntity();
+						for (Entity result : p.asIterable()) 
+						{
+							 %>
+							 <div class="contents">				  
+							  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
+							  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
+							  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+							 </div>
+												
+						<%
+						}
+				  }
+				  else if(sort.equals("alph2"))
+				  {
+					  System.out.println("In");
+					  Query q1 = new Query("user").addSort("Name", SortDirection.DESCENDING);
+					  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+					  PreparedQuery p = datastore.prepare(q1);						
+						//Entity result =pq.asSingleEntity();
+						for (Entity result : p.asIterable()) 
+						{
+							 %>
+							 <div class="contents">				  
+							  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
+							  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
+							  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+							 </div>
+												
+						<%
+						}
+				  }
+				  else
+				  {
+				  	Query q = new Query("user");
+					DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+					PreparedQuery pq = datastore.prepare(q);						
+					//Entity result =pq.asSingleEntity();
+					for (Entity result : pq.asIterable()) 
+					{
+						 %>
+						 <div class="contents">				  
+						  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
+						  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
+						  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+						 </div>
+											
+					<%
+					}
+			  	} 
 			  %>
 		
 		</div>
