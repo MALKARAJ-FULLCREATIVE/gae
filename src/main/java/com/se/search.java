@@ -1,11 +1,9 @@
 package com.se;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
-import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entities;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.Filter;
@@ -23,16 +19,16 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 /**
- * Servlet implementation class user
+ * Servlet implementation class search
  */
-@WebServlet("/add")
-public class user extends HttpServlet {
+@WebServlet("/search")
+public class search extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public user() {
+    public search() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,9 +37,33 @@ public class user extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		             request.getRequestDispatcher("hello.jsp").forward(request, response);;
-		
+		// TODO Auto-generated method stub
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			try {
+			String info=(String)request.getParameter("name");
+			System.out.println("info"+info);
+			if(info!=null)
+			{
+				Filter f=new FilterPredicate("Name",FilterOperator.EQUAL,info);
+			    Query q = new Query("user").setFilter(f);
+				PreparedQuery pq = datastore.prepare(q);
+				Entity result = pq.asSingleEntity();
+				System.out.println(result);
+				request.setAttribute("name",result.getProperty("Name"));
+				request.setAttribute("age",result.getProperty("Age"));
+				request.setAttribute("place",result.getProperty("Place"));
+	
+				RequestDispatcher rd = request.getRequestDispatcher("/main");
+				rd.forward(request,response);
+			}
+	
+			}
+			catch(Exception e)
+			{
+				System.out.println("Not found");
+				RequestDispatcher rd = request.getRequestDispatcher("/main");
+				rd.forward(request,response);
+			}
 	}
 
 	/**
@@ -51,21 +71,7 @@ public class user extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String name=request.getParameter("name");
-		int age=Integer.parseInt(request.getParameter("age"));
-		String place=request.getParameter("place");
-		Entity e=new Entity("user");
-		e.setProperty("Name", name);
-		e.setProperty("Age",age);
-		e.setProperty("Place", place);
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		datastore.put(e);
-		
-
-		response.sendRedirect("/add");
-		
-		
+		doGet(request, response);
 	}
 
 }

@@ -14,18 +14,27 @@
 	input{
 		padding:5px;
 		margin:10px;
-		
+		margin-left:5px;
+		border:solid #C6DFFB 2px;
+				
 	}
+	a{
+      text-decoration:none;
+      padding:5px;
+      box-shadow:0 0 2px 2px #C6DFFB;
+    }
 
 </style>
 </head>
 <body>
 	<div class="cont">
-	 <form action="/user" method="POST">
-	     Name:<input type="text" name="name"><br>
-	     Age:<input type="text" name="age"><br>
-	     Place:<input type="text" name="place"><br>
+	 <form action="/add" method="POST">
+	     <input type="text" name="name" placeholder="Name"><br>
+	     <input type="text" name="age" placeholder="Age"><br>
+	     <input type="text" name="place" placeholder="Place"><br>
 	     <input type="submit" value="submit">
+	     <br><br>
+	     <a href="/main">All Users</a>
 	 </form>
 	 </div>
 </body>
