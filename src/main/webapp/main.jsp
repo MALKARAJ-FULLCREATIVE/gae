@@ -65,7 +65,8 @@
 				<a href="/add">Add user</a>								
 			</form>
 			  <%
-			  	  String sort=(String)request.getParameter("sort");
+			  	  String sort="";
+			  	  sort=(String)request.getParameter("sort");
 				  String name=(String)request.getAttribute("name");
 				  System.out.println(sort);
 				  Long age=(Long)request.getAttribute("age");
@@ -83,43 +84,44 @@
 			 <%
 		     	  }
 
-				  else if(sort.equals("alph1"))
-				  {
-					  System.out.println("In");
-					  Query q1 = new Query("user").addSort("Name", SortDirection.ASCENDING);
-					  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-					  PreparedQuery p = datastore.prepare(q1);						
-						//Entity result =pq.asSingleEntity();
-						for (Entity result : p.asIterable()) 
-						{
-							 %>
-							 <div class="contents">				  
-							  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
-							  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
-							  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
-							 </div>
-												
-						<%
-						}
-				  }
-				  else if(sort.equals("alph2"))
-				  {
-					  System.out.println("In");
-					  Query q1 = new Query("user").addSort("Name", SortDirection.DESCENDING);
-					  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-					  PreparedQuery p = datastore.prepare(q1);						
-						//Entity result =pq.asSingleEntity();
-						for (Entity result : p.asIterable()) 
-						{
-							 %>
-							 <div class="contents">				  
-							  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
-							  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
-							  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
-							 </div>
-												
-						<%
-						}
+				  else if(sort!=null){
+					  
+					     if(sort.equals("alph1"))
+						  {
+							  Query q1 = new Query("user").addSort("Name", SortDirection.ASCENDING);
+							  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+							  PreparedQuery p = datastore.prepare(q1);						
+								//Entity result =pq.asSingleEntity();
+								for (Entity result : p.asIterable()) 
+								{
+									 %>
+									 <div class="contents">				  
+									  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
+									  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
+									  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+									 </div>
+														
+								<%
+								}
+						  }
+						  else if(sort.equals("alph2") )
+						  {
+							  Query q1 = new Query("user").addSort("Name", SortDirection.DESCENDING);
+							  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+							  PreparedQuery p = datastore.prepare(q1);						
+								//Entity result =pq.asSingleEntity();
+								for (Entity result : p.asIterable()) 
+								{
+									 %>
+									 <div class="contents">				  
+									  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
+									  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
+									  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+									 </div>
+														
+								<%
+								}
+						  }
 				  }
 				  else
 				  {
