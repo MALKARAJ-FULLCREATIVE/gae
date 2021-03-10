@@ -10,6 +10,10 @@
 		text-align:center;
 		padding:20px;
 		margin:5px;
+		background-color:#C6DFFB;
+		margin-right:600px;
+		margin-left:600px;
+		margin-top:200px;
 	}
 	input{
 		padding:5px;
@@ -28,6 +32,7 @@
 </head>
 <body>
 	<div class="cont">
+	<h2>Add User</h2>
 	 <form action="/add" method="POST">
 	     <input type="text" name="name" placeholder="Name"><br>
 	     <input type="text" name="age" placeholder="Age"><br>

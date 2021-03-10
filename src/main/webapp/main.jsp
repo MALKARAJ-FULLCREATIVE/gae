@@ -36,7 +36,12 @@
 	.info{
 		padding:10px;
 	}
-
+	.heading{
+	margin:15px;
+	background-color:#C6DFFB;
+	padding:1px;
+	text-align:center;
+	}
 </style>
 </head>
 <body>
@@ -44,6 +49,9 @@
 	<div class="container">
 
 		<div class="info">
+		    <div class="heading">
+		       <h2>Database</h2>
+			</div>
 			<form action="/search"  method="GET">
 				<input type="text" placeholder="search" name="name">
 				<input type="submit" value="SUBMIT">
@@ -60,7 +68,8 @@
 				     <h3>Age :<%=age %></h3>
 				     <h3>Place :<%= place%></h3>
 				 </div>
-			  <%}
+			  <%
+			  }
 			  else
 			  {
 			  	Query q = new Query("user");
@@ -68,13 +77,16 @@
 				PreparedQuery pq = datastore.prepare(q);
 				//Entity result =pq.asSingleEntity();
 				
-				for (Entity result : pq.asIterable()) {%>
+				for (Entity result : pq.asIterable()) 
+				{
+				%>
 					<div class="contents">				  
 					  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
 					  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
 					  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
 					 </div>
-				<%}
+				<%
+				}
 			  } 
 			  %>
 		
