@@ -40,7 +40,30 @@ public class TestUser {
 	  assertEquals(actual, Expected);
   }
   
+  @Test
+  public void TestAscSort()
+  {
+  main m=new main();
+
+    String p=m.sort("alph1").toString();
+    String expected="SELECT * FROM user ORDER BY Name";
+    assertEquals(p,expected);
+    
+    
+  }
+
+  @Test
+  public void TestDescSort()
+  {
+  main m=new main();
+
+    String p=m.sort("alph2").toString();
+    String expected="SELECT * FROM user ORDER BY Name DESC";
+    assertEquals(p,expected);
+    
+    
 
   
 
+}
 }
