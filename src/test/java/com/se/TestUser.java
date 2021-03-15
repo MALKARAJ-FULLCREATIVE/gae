@@ -24,7 +24,6 @@ public class TestUser {
     helper.tearDown();
   }
 
-  // Run this test twice to prove we're not leaking any state across tests.
   @Test
   public void TestAdd() {
 	  user u=new user();
