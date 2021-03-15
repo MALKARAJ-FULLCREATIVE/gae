@@ -24,12 +24,11 @@ public class TestUser {
     helper.tearDown();
   }
 
-  // Run this test twice to prove we're not leaking any state across tests.
   @Test
   public void TestAdd() {
 	  user u=new user();
 	  Entity r=u.add("George", 21, "Chennai");
-	  assertEquals("George",r.getProperty("Name"));
+	  assertEquals(r.getProperty("Name"),"George");
   }
   
   @Test
@@ -37,10 +36,11 @@ public class TestUser {
   {
 	  main m=new main();
 	  String actual=m.user().toString();
-	  System.out.println(actual);
 	  String Expected="SELECT * FROM user";
 	  assertEquals(actual, Expected);
   }
+  
 
+  
 
 }
