@@ -65,8 +65,9 @@
 				<a href="/add">Add user</a>								
 			</form>
 			  <%
-			  	  String sort="";
-			  	  sort=(String)request.getParameter("sort");
+    			  PreparedQuery p=(PreparedQuery)request.getAttribute("p");
+			  	  System.out.println(p);
+			  	  String sort=(String)request.getParameter("sort");
 				  String name=(String)request.getAttribute("name");
 				  System.out.println(sort);
 				  Long age=(Long)request.getAttribute("age");
@@ -80,19 +81,11 @@
 				     <h3>Age :<%=age %></h3>
 				     <h3>Place :<%= place%></h3>
 
-				 </div>
-			 <%
+				 </div> 
+				<%
 		     	  }
-
-				  else if(sort!=null){
-					  
-					     if(sort.equals("alph1"))
-						  {
-							  Query q1 = new Query("user").addSort("Name", SortDirection.ASCENDING);
-							  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-							  PreparedQuery p = datastore.prepare(q1);						
-								//Entity result =pq.asSingleEntity();
-								for (Entity result : p.asIterable()) 
+				  else{
+				       for (Entity result : p.asIterable()) 
 								{
 									 %>
 									 <div class="contents">				  
@@ -103,46 +96,7 @@
 														
 								<%
 								}
-						  }
-						  else if(sort.equals("alph2") )
-						  {
-							  Query q1 = new Query("user").addSort("Name", SortDirection.DESCENDING);
-							  DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-							  PreparedQuery p = datastore.prepare(q1);						
-								//Entity result =pq.asSingleEntity();
-								for (Entity result : p.asIterable()) 
-								{
-									 %>
-									 <div class="contents">				  
-									  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
-									  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
-									  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
-									 </div>
-														
-								<%
-								}
-						  }
-				  }
-				  else
-				  {
-				  	Query q = new Query("user");
-					DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-					PreparedQuery pq = datastore.prepare(q);						
-					//Entity result =pq.asSingleEntity();
-					for (Entity result : pq.asIterable()) 
-					{
-						 %>
-						 <div class="contents">				  
-						  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
-						  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
-						  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
-						 </div>
-											
-					<%
-					}
-			  	} 
-			  %>
-		
+				   }%>
 		</div>
 	</div>
 

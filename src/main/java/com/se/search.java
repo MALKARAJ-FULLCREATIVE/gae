@@ -41,7 +41,6 @@ public class search extends HttpServlet {
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			try {
 			String info=(String)request.getParameter("name");
-			System.out.println("info"+info);
 			if(info!=null)
 			{
 				Filter f=new FilterPredicate("Name",FilterOperator.EQUAL,info);
