@@ -36,9 +36,8 @@
 </head>
 <body>
 	<div class="cont">
-	<h2>Add User</h2>
-	 <form action="/add" method="POST">
-	     <input type="text" name="id" placeholder="ID"><br>
+	<h2>Edit User</h2>
+	 <form action="/edit?id=<%=request.getParameter("id") %>" method="POST">
 	     <input type="text" name="name" placeholder="Name"><br>
 	     <input type="text" name="age" placeholder="Age"><br>
 	     <input type="text" name="place" placeholder="Place"><br>

@@ -1,3 +1,5 @@
+<%@page import="com.google.appengine.api.datastore.Key"%>
+<%@page import="com.google.appengine.api.datastore.Query.FilterOperator"%>
 <%@page import="com.google.appengine.api.datastore.Query.SortDirection"%>
 <%@page import="com.google.appengine.api.datastore.DatastoreServiceFactory"%>
 <%@page import="com.google.appengine.api.datastore.DatastoreService"%>
@@ -5,6 +7,8 @@
 <%@page import="com.google.appengine.api.datastore.Query"%>
 <%@page import="com.google.appengine.api.datastore.Entity"%>
 <%@page import="com.google.appengine.api.datastore.Entities"%>
+
+<%@page import="com.google.appengine.api.datastore.Query.FilterPredicate"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -30,6 +34,15 @@
       text-decoration:none;
       padding:5px;
       box-shadow:0 0 2px 2px #C6DFFB;
+    }
+    .opr a{
+      
+	    text-decoration: none;
+	    padding: 4px;
+	    color: black;
+	    margin-right: 6px;
+	    box-shadow: 0 0 2px 2px #adcff5;
+
     }
 	.contents{
 	margin:15px;
@@ -86,13 +99,19 @@
 		     	  }
 				  else{
 				       for (Entity result : p.asIterable()) 
-								{
+								{    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
 									 %>
 									 <div class="contents">				  
 									  <h3>Name :<%=(String)result.getProperty("Name") %></h3>
 									  <h3>Age :<%=(Long)result.getProperty("Age") %></h3>
 									  <h3>Place :<%=(String)result.getProperty("Place") %></h3>
+							          <div class="opr">
+								     	<a href="/edit?id=<%= result.getKey().getId() %>">Edit</a>
+								     	<a href="/delete?id=<%= result.getKey().getId() %>">Delete</a>
+								     </div>
 									 </div>
+
 														
 								<%
 								}
