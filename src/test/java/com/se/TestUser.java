@@ -74,6 +74,5 @@ public class TestUser {
 	  Entity en=edit.update("101", "George Joseph", 10, "chennai");
 	  assertEquals("George Joseph",en.getProperty("Name"));
   }
-  
 
 }
