@@ -41,6 +41,20 @@ public class user extends HttpServlet {
 	 */
     
     
+    public static Entity funDataStore(String name,int age,String place)
+    {
+    	
+    	Entity e=new Entity("user");
+		e.setProperty("Name", name);
+		e.setProperty("Age",age);
+		e.setProperty("Place", place);
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		datastore.put(e);
+		
+    	 return e;
+    	
+    }
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
@@ -56,12 +70,9 @@ public class user extends HttpServlet {
 		String name=request.getParameter("name");
 		int age=Integer.parseInt(request.getParameter("age"));
 		String place=request.getParameter("place");
-		Entity e=new Entity("user");
-		e.setProperty("Name", name);
-		e.setProperty("Age",age);
-		e.setProperty("Place", place);
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		datastore.put(e);
+		funDataStore(name,age,place);
+		
+		  
 	response.sendRedirect("/about.jsp");
 		
 		

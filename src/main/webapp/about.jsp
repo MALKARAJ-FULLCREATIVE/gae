@@ -8,8 +8,9 @@
 </head>
 <body>
  <a href=/hello.jsp> add</a></br>
-<a href=/search.jsp> search</a>
-
+<a href=/search.jsp> search</a></br>
+<a href=/Sorting?sort=asc> sort by ascending by name</a></br></br>
+<a href =/Sorting?sort=desc>  sort by descending by name</a>
 
 </body>
 </html>

@@ -62,6 +62,7 @@ public class ControllerSearch extends HttpServlet {
                    valueExist=true;
 
                 response.getWriter().print("Name:"+resultName+"   Age:"+result.getProperty("Age"));
+                response.getWriter().println();
  
     }
     
