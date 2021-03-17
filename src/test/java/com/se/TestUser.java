@@ -2,11 +2,7 @@ package com.se;
 
 
 import static org.junit.Assert.assertEquals;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.junit.After;
@@ -70,8 +66,8 @@ public class TestUser {
   public void TestUpdate()
   {
 	  Edit edit=new Edit();
-	  Entity e=edit.update("101", "George", 10, "chennai");
-	  Entity en=edit.update("101", "George Joseph", 10, "chennai");
+	  Entity e=edit.update("101", "George", 10, "Chennai");
+	  Entity en=edit.update("101", "George Joseph", 10, "Chennai");
 	  assertEquals("George Joseph",en.getProperty("Name"));
   }
 
