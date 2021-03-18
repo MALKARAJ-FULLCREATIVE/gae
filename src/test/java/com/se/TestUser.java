@@ -44,7 +44,6 @@ public class TestUser {
   public void TestAscSort()
   {
 	  main m=new main();
-	  
 	  String p=m.sort("alph1").toString();
 	  String expected="SELECT * FROM user ORDER BY Name";
 	  assertEquals(p,expected);
@@ -55,13 +54,12 @@ public class TestUser {
   @Test
   public void TestDescSort()
   {
-	  main m=new main();
-	  
+	  main m=new main();  
 	  String p=m.sort("alph2").toString();
 	  String expected="SELECT * FROM user ORDER BY Name DESC";
-	  assertEquals(p,expected);
-	  
+	  assertEquals(p,expected);  
   }
+  
   @Test
   public void TestUpdate()
   {
